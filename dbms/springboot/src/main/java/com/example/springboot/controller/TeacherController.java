@@ -2,6 +2,7 @@ package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
 import com.example.springboot.entity.Teacher;
+import com.example.springboot.service.IScService;
 import com.example.springboot.service.ITeacherService;
 import org.springframework.web.bind.annotation.*;
 

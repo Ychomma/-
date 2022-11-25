@@ -3,6 +3,7 @@ package com.example.springboot.controller;
 import com.example.springboot.common.Result;
 import com.example.springboot.entity.Course;
 import com.example.springboot.service.ICourseService;
+import com.example.springboot.service.IScService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,6 +15,8 @@ import java.util.List;
 public class CourseController {
     @Resource
     ICourseService courseService;
+    @Resource
+    IScService scService;
 
     @GetMapping("/list")
     public Result List(){
@@ -32,6 +35,7 @@ public class CourseController {
     }
     @DeleteMapping("/delete/{id}")
     public Result delete(@PathVariable String id){
+        scService.deleteByCId(id);
         courseService.deleteById(id);
         return Result.success();
     }

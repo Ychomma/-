@@ -2,6 +2,7 @@ package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
 import com.example.springboot.entity.Student;
+import com.example.springboot.service.IScService;
 import com.example.springboot.service.IStudentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,8 @@ import java.util.List;
 public class StudentController {
     @Resource
     IStudentService studentService;
+    @Resource
+    IScService scService;
 
     @GetMapping("/list")
     public Result List(){
@@ -32,6 +35,7 @@ public class StudentController {
     }
     @DeleteMapping("/delete/{id}")
     public Result delete(@PathVariable String id){
+        scService.deleteBySId(id);
         studentService.deleteById(id);
         return Result.success();
     }
