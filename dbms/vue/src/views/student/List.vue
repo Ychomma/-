@@ -17,11 +17,11 @@
       <el-table-column prop="phone" label="联系方式"></el-table-column>
       <el-table-column label="操作" width="280">
         <template v-slot="scope">
-          <el-button type="primary" @click="$router.push('/editCategory?id=' + scope.row.id)">编辑</el-button>
+          <el-button type="primary" @click="$router.push('/editStudent?id=' + scope.row.sno)">编辑</el-button>
           <el-popconfirm
               style="margin-left: 5px"
               title="您确定删除这行数据吗？"
-              @confirm="del(scope.row.id)"
+              @confirm="del(scope.row.sno)"
           >
             <el-button type="danger" slot="reference">删除</el-button>
           </el-popconfirm>
@@ -80,7 +80,6 @@ export default {
         params: this.params
       }).then(res => {
         if (res.code === '200') {
-          console.log(res)
           this.tableData = res.data
           this.total = res.data.total
         }
@@ -100,7 +99,7 @@ export default {
       this.load()
     },
     del(id) {
-      request.delete("/category/delete/" + id).then(res => {
+      request.delete("/student/delete/" + id).then(res => {
         if (res.code === '200') {
           this.$notify.success("删除成功")
           //删除后自动刷新

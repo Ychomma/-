@@ -30,7 +30,6 @@ public class AdminController {
         //    return Result.error("用户名或密码错误");
         //}
 
-        System.out.println("6666");
         return Result.success(login);
     }
 

@@ -18,7 +18,6 @@ public class StudentController {
     @GetMapping("/list")
     public Result List(){
         List<Student> list=studentService.list();
-        System.out.println(Result.success(list));
         return Result.success(list);
     }
     @PostMapping("/save")
@@ -32,13 +31,13 @@ public class StudentController {
         return Result.success();
     }
     @DeleteMapping("/delete/{id}")
-    public Result delete(@PathVariable String sno){
-        studentService.deleteById(sno);
+    public Result delete(@PathVariable String id){
+        studentService.deleteById(id);
         return Result.success();
     }
     @GetMapping("/{id}")
-    public Result getById(@PathVariable String sno){
-        Student student = studentService.getById(sno);
+    public Result getById(@PathVariable String id){
+        Student student = studentService.getById(id);
         return Result.success(student);
     }
 
