@@ -23,8 +23,8 @@
         where tno = #{tno}
     </update>
     <insert id="save">
-        insert into teacher (tno,tname,cno)
-        values (#{tno}, #{tname},#{cno})
+        insert into teacher (tno,tname,cno,phone)
+        values (#{tno}, #{tname},#{cno},#{phone})
     </insert>
 
     <select id="getById" resultType="com.example.springboot.entity.Teacher">
