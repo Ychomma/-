@@ -3,7 +3,7 @@ import router from "@/router";
 import Cookies from "js-cookie";
 
 const request = axios.create({
-    baseURL: 'http://localhost:9090/api', //注意！！这里是全局统一加上了'/api'前缀
+    baseURL: 'http://localhost:9090/', //注意！！这里是全局统一加上了'/api'前缀
     timeout: 5000
 })
 

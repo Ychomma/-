@@ -55,6 +55,36 @@ const routes = [
                 path: 'addStudent',
                 name: 'AddStudent',
                 component: () => import('@/views/student/Add.vue')
+            },
+            {
+                path: 'courseList',
+                name: 'CourseList',
+                component: () => import('@/views/course/List.vue')
+            },
+            {
+                path: 'editCourse',
+                name: 'EditCourse',
+                component: () => import('@/views/course/Edit.vue')
+            },
+            {
+                path: 'addCourse',
+                name: 'AddCourse',
+                component: () => import('@/views/course/Add.vue')
+            },
+            {
+                path: 'teacherList',
+                name: 'TeacherList',
+                component: () => import('@/views/teacher/List.vue')
+            },
+            {
+                path: 'editTeacher',
+                name: 'EditTeacher',
+                component: () => import('@/views/teacher/Edit.vue')
+            },
+            {
+                path: 'addTeacher',
+                name: 'AddTeacher',
+                component: () => import('@/views/teacher/Add.vue')
             }
 
         ]
