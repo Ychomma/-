@@ -1,6 +1,7 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
+import com.example.springboot.entity.ExtraCourse;
 import com.example.springboot.entity.Student;
 import com.example.springboot.service.IScService;
 import com.example.springboot.service.IStudentService;
@@ -43,6 +44,11 @@ public class StudentController {
     public Result getById(@PathVariable String id){
         Student student = studentService.getById(id);
         return Result.success(student);
+    }
+    @PostMapping("/listbycondition")
+    public Result listByCondition(@RequestBody Student obj){
+        List<Student> list = studentService.listByCondition(obj);
+        return Result.success(list);
     }
 
 }

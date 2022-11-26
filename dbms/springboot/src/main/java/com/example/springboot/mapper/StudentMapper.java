@@ -10,7 +10,7 @@ import java.util.List;
 public interface StudentMapper {
     List<Student> list();
 
-    List<Student> listByCondition(BaseRequest baseRequest);
+    List<Student> listByCondition(Student obj);
 
     void save(Student student);
 

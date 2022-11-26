@@ -33,17 +33,5 @@
         where tno = #{tno}
     </select>
 
-    <select id="listByCondition" resultType="com.example.springboot.entity.Teacher">
-        select *
-        from teacher
-        <where>
-            <if test="tname != null and tname != ''">
-                tname like concat('%', #{tname}, '%')
-            </if>
-            <if test="cno  != null and cno != ''">
-                cno like concat('%', #{cno}, '%')
-            </if>
-        </where>
-        order by tno desc
-    </select>
+
 </mapper>

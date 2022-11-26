@@ -2,7 +2,9 @@ package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
 import com.example.springboot.entity.Sc;
+import com.example.springboot.entity.Union;
 import com.example.springboot.service.IScService;
+import com.example.springboot.service.IUnionService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,9 +16,11 @@ import java.util.List;
 public class ScController {
     @Resource
     IScService scService;
+    @Resource
+    IUnionService unionService;
     @GetMapping("/list")
     public Result List(){
-        List<Sc> list=scService.list();
+        Result list = unionService.list();
         return Result.success(list);
     }
     @PostMapping("/save")
@@ -49,5 +53,9 @@ public class ScController {
         List<Sc> sc = scService.getByCId(cid);
         return Result.success(sc);
     }
-
+    @PostMapping("/listbycondition")
+    public Result listByCondition(@RequestBody Union obj){
+        Result list = unionService.listByCondition(obj);
+        return Result.success(list);
+    }
 }

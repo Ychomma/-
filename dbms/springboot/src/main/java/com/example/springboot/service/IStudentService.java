@@ -13,4 +13,6 @@ public interface IStudentService {
     void update(Student obj);
 
     void deleteById(String id);
+
+    List<Student> listByCondition(Student obj);
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface CourseMapper {
     List<Course> list();
 
-    List<Course> listByCondition(BaseRequest baseRequest);
+    List<Course> listByCondition(Course obj);
 
     void save(Course course);
 

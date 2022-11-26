@@ -44,4 +44,9 @@ public class StudentService implements IStudentService {
     public void deleteById(String id) {
         studentMapper.deleteById(id);
     }
+
+    @Override
+    public List<Student> listByCondition(Student obj) {
+        return studentMapper.listByCondition(obj);
+    }
 }

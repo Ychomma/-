@@ -8,8 +8,14 @@
       <el-form-item label="教师姓名" prop="tname">
         <el-input v-model="form.tname" placeholder="请输入教师姓名"></el-input>
       </el-form-item>
+      <el-form-item label="授课课程编号" prop="cno">
+        <el-input v-model="form.cno" placeholder="请输入课程编号" @blur="findCourse()"></el-input>
+      </el-form-item>
+      <el-form-item label="授课课程号名称" prop="cname">
+        <el-input v-model="form.cname" placeholder="该课程不存在" disabled></el-input>
+      </el-form-item>
       <el-form-item label="教师联系方式" prop="phone">
-        <el-input v-model="form.phone" placeholder="请输入教师联系方式"></el-input>
+        <el-input v-model="form.phone" placeholder="请输入教师联系方式" ></el-input>
       </el-form-item>
     </el-form>
 
@@ -29,23 +35,48 @@ export default {
       form: {},
       rules: {
         //姓名仅要求为必填
-        tno: [
-          {required: true, message: '请输入教师编号', trigger: 'blur'},
-        ],
-        tname: [
-          {required: true, message: '请输入教师姓名', trigger: 'blur'},
-        ],
+        rules: {
+          //姓名仅要求为必填
+          cno: [
+            {required: true, message: '请输入课程编号', trigger: 'blur'},
+          ],
+          tno: [
+            {required: true, message: '请输入教师编号', trigger: 'blur'},
+          ],
+          tname: [
+            {required: true, message: '请输入教师姓名', trigger: 'blur'},
+          ],
+          cname: [
+            {required: true, message: '该课程不存在', trigger: 'blur'},
+          ],
+        }
       }
     }
   },
   created() {
     const id = this.$route.query.id
     request.get("/teacher/" + id).then(res => {
-      console.log(res)
       this.form = res.data
+      request.get("/course/"+this.form.cno).then(res=>{
+        console.log(res)
+        if(res.data!=null) {
+          this.form.cname = res.data.cname
+          this.$forceUpdate()
+        }
+      })
     })
+
   },
   methods: {
+    findCourse(){
+      request.get("/course/"+this.form.cno).then(res=>{
+        this.form.cname=null;
+        if(res.data!=null) {
+          this.form.cname = res.data.cname
+          this.$forceUpdate()
+        }
+      })
+    },
     save() {
       request.post('/course/update', this.form).then(res => {
         if (res.code === '200') {

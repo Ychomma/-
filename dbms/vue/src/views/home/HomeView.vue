@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="item">用户名:{{ admin.username }}</div>
-    <div class="item">手机号:{{ admin.phone }}</div>
-    <div class="item">邮箱:{{ admin.email }}</div>
+    <h1>Welcome！</h1>
+    <img src="../../assets/homeview.png" style="position: relative;margin-left: 25%;margin-top: 5%;width: 600px;height: 368px">
   </div>
 </template>
 

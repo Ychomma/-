@@ -1,7 +1,10 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
+import com.example.springboot.entity.ExtraCourse;
 import com.example.springboot.entity.Teacher;
+import com.example.springboot.entity.Union;
+import com.example.springboot.service.IExtraCourseService;
 import com.example.springboot.service.IScService;
 import com.example.springboot.service.ITeacherService;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +18,15 @@ import java.util.List;
 public class TeacherController {
     @Resource
     ITeacherService teacherService;
+    @Resource
+    IExtraCourseService extraCourseService;
 
     @GetMapping("/list")
     public Result List(){
-        List<Teacher> list=teacherService.list();
+        List<ExtraCourse> list = extraCourseService.list();
         return Result.success(list);
     }
+
     @PostMapping("/save")
     public Result save(@RequestBody Teacher obj){
         teacherService.save(obj);
@@ -40,6 +46,12 @@ public class TeacherController {
     public Result getById(@PathVariable String id){
         Teacher teacher = teacherService.getById(id);
         return Result.success(teacher);
+    }
+
+    @PostMapping("/listbycondition")
+    public Result listByCondition(@RequestBody ExtraCourse obj){
+        List<ExtraCourse> list = extraCourseService.listByCondition(obj);
+        return Result.success(list);
     }
 
 }

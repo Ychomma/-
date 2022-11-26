@@ -13,4 +13,7 @@ public interface ICourseService {
     void update(Course obj);
 
     void deleteById(String id);
+
+    List<Course> listByCondition(Course obj);
+
 }

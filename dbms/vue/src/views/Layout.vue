@@ -5,7 +5,7 @@
       <div style="width: 300px">
         <img src="@/assets/logo.png" alt=""
              style="width: 40px; position: relative; top: 10px; left: 20px">
-        <span style="margin-left: 25px; font-size: 24px">图书管理系统</span>
+        <span style="margin-left: 25px; font-size: 24px">学生信息与选课管理系统</span>
       </div>
       <div style="flex: 1; text-align: right; padding-right: 20px">
         <el-dropdown size="medium">
@@ -43,7 +43,7 @@
           </el-submenu>
           <el-submenu index="student">
             <template slot="title">
-              <i class="el-icon-s-operation"></i>
+              <i class="el-icon-user-solid"></i>
               <span>学生管理</span>
             </template>
             <el-menu-item index="/studentList">学生列表</el-menu-item>
@@ -61,13 +61,17 @@
           </el-submenu>
           <el-submenu index="teacher">
             <template slot="title">
-              <i class="el-icon-s-operation"></i>
+              <i class="el-icon-s-check"></i>
               <span>教师管理</span>
             </template>
             <el-menu-item index="/teacherList">教师列表</el-menu-item>
             <el-menu-item index="/editTeacher">编辑教师信息</el-menu-item>
             <el-menu-item index="/addTeacher">增加教师</el-menu-item>
           </el-submenu>
+          <el-menu-item index="scList">
+            <i class="el-icon-files"></i>
+            <span>选课情况</span>
+          </el-menu-item>
         </el-menu>
       </div>
 

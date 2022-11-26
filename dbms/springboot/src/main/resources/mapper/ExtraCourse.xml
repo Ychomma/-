@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.ExtraCourseMapper">
+    <select id="list" resultType="com.example.springboot.entity.ExtraCourse">
+    select teacher.tno,teacher.cno,teacher.tname,teacher.phone,course.cname
+    from teacher,course
+    where teacher.cno=course.cno
+    </select>
+    <select id="listByCondition" resultType="com.example.springboot.entity.ExtraCourse">
+        select teacher.tno,teacher.cno,teacher.tname,teacher.phone,course.cname
+        from teacher,course
+        <where>
+            <if test="1==1">
+                teacher.cno=course.cno
+            </if>
+            <if test="cname != null and cname != ''">
+                and course.cname like concat('%', #{cname}, '%')
+            </if>
+            <if test="tname != null and tname != ''">
+                and teacher.tname like concat('%', #{tname}, '%')
+            </if>
+        </where>
+        order by tno desc
+    </select>
+</mapper>

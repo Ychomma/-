@@ -2,13 +2,13 @@
   <div>
     <!-- 搜索表单 -->
     <div style="margin-bottom: 20px">
-      <el-input style="width: 240px" placeholder="请输入分类名称" v-model="params.name"></el-input>
-      <el-button style="margin-left: 5px" type="primary" @click="load"><i class="el-icon-search">搜索</i></el-button>
+      <el-input style="width: 240px" placeholder="根据课程名称查询" v-model="params.cname"></el-input>
+      <el-button style="margin-left: 5px" type="primary" @click="search"><i class="el-icon-search">搜索</i></el-button>
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh">重置</i></el-button>
     </div>
     <!-- 表格 -->
     <el-table :data="tableData" stripe  row-key="id" default-expand-all>
-      <el-table-column prop="cno" label="课程编号" width="80"></el-table-column>
+      <el-table-column prop="cno" label="课程编号" ></el-table-column>
       <el-table-column prop="cname" label="课程名称"></el-table-column>
       <el-table-column label="操作" width="280">
         <template v-slot="scope">
@@ -51,9 +51,7 @@ export default {
       dialogFormVisible:false ,
       admin: Cookies.get("admin") ? JSON.parse(Cookies.get('admin')) : {},
       params: {
-        pageNum: 1,
-        pageSize: 10,
-        name: '',
+        cname:null
       },
       pid:null,
       form:{
@@ -70,6 +68,14 @@ export default {
     this.load();
   },
   methods: {
+    search(){
+      request.post("/course/listbycondition",this.params).then(res=>{
+        if (res.code === '200') {
+          this.tableData = res.data
+          this.total = res.data.total
+        }
+      })
+    },
     load() {
       request.get('/course/list', {
         params: this.params
@@ -82,9 +88,7 @@ export default {
     },
     reset() {
       this.params = {
-        pageNum: 1,
-        pageSize: 10,
-        name: '',
+        cname:null
       }
       this.load()
     },

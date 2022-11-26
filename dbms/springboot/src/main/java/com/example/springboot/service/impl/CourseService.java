@@ -37,4 +37,9 @@ public class CourseService implements ICourseService {
     public void deleteById(String id) {
         courseMapper.deleteById(id);
     }
+
+    @Override
+    public List<Course> listByCondition(Course obj) {
+        return courseMapper.listByCondition(obj);
+    }
 }
