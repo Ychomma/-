@@ -34,12 +34,6 @@ public class StudentController {
         studentService.update(obj);
         return Result.success();
     }
-    @DeleteMapping("/delete/{id}")
-    public Result delete(@PathVariable String id){
-        scService.deleteBySId(id);
-        studentService.deleteById(id);
-        return Result.success();
-    }
     @GetMapping("/{id}")
     public Result getById(@PathVariable String id){
         Student student = studentService.getById(id);
@@ -51,4 +45,9 @@ public class StudentController {
         return Result.success(list);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public Result Delete(@PathVariable String id){
+        studentService.Delete(id);
+        return Result.success();
+    }
 }

@@ -2,9 +2,13 @@ package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
 import com.example.springboot.entity.Sc;
+import com.example.springboot.entity.Student;
+import com.example.springboot.entity.StudentSc;
 import com.example.springboot.entity.Union;
 import com.example.springboot.service.IScService;
+import com.example.springboot.service.IStudentSc;
 import com.example.springboot.service.IUnionService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,6 +22,9 @@ public class ScController {
     IScService scService;
     @Resource
     IUnionService unionService;
+
+    @Resource
+    IStudentSc studentSc;
     @GetMapping("/list")
     public Result List(){
         Result list = unionService.list();
@@ -57,5 +64,25 @@ public class ScController {
     public Result listByCondition(@RequestBody Union obj){
         Result list = unionService.listByCondition(obj);
         return Result.success(list);
+    }
+    @PostMapping("/studentSclist")
+    public Result studentSclist(@RequestBody String sno){
+        List<StudentSc> list= studentSc.list(sno);
+        return Result.success(list);
+    }
+    @PostMapping("/mySclist")
+    public Result mySclist(@RequestBody String sno){
+        List<StudentSc> list= studentSc.MyScList(sno);
+        return Result.success(list);
+    }
+    @PostMapping("/delete")
+    public Result Delete(@RequestParam String cno,String sno,String tno){
+        scService.delete(cno, sno, tno);
+        return Result.success();
+    }
+    @PostMapping("/studentScByCondition")
+    public Result studentScByCondition(@RequestBody StudentSc obj)
+    {
+        return Result.success(studentSc.ScListByCondition(obj));
     }
 }

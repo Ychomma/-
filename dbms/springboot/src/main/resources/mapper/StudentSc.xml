@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.StudentScMapper">
+    <select id="list" resultType="com.example.springboot.entity.StudentSc">
+        select course.cno,course.cname,teacher.tno,teacher.tname,teacher.phone
+        from course,teacher
+        where teacher.cno=course.cno
+    </select>
+    <select id="MyScList" resultType="com.example.springboot.entity.StudentSc">
+        select course.cno,course.cname,teacher.tno,teacher.tname,teacher.phone
+        from course,teacher,sc
+        <where>
+            teacher.cno=course.cno and sc.cno=course.cno and sc.sno=${sno}
+        </where>
+    </select>
+    <select id="ScListByCondition" resultType="com.example.springboot.entity.StudentSc">
+        select course.cno,course.cname,teacher.tno,teacher.tname,teacher.phone
+        from course,teacher,sc
+        <where>
+            teacher.cno=course.cno and sc.cno=course.cno
+            <if test="cname!=null and cname!=''">
+                and course.cname=#{cname}
+            </if>
+        </where>
+    </select>
+</mapper>

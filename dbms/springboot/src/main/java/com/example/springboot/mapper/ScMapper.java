@@ -18,4 +18,8 @@ public interface ScMapper {
 
     void deleteBySId(String id);
     void deleteByCId(String id);
+
+    List<Sc> findSc(String cno,String sno,String tno);
+
+    void delete(String cno,String sno,String tno);
 }

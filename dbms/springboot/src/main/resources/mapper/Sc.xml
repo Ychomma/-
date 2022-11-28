@@ -27,8 +27,8 @@
         where sno = #{sno} and cno=#{cno}
     </update>
     <insert id="save">
-        insert into sc (sno,cno,grade)
-        values (#{sno}, #{cno}, #{grade})
+        insert into sc (sno,cno,tno,grade)
+        values (#{sno}, #{cno},#{tno},#{grade})
     </insert>
 
     <select id="getBySId" resultType="com.example.springboot.entity.Sc">
@@ -41,6 +41,15 @@
         from sc
         where cno = #{cno}
     </select>
-
+    <select id="findSc" resultType="com.example.springboot.entity.Sc">
+        select *
+        from sc
+        where sno = ${sno} and cno=#{cno} and tno=#{tno}
+    </select>
+    <delete id="delete">
+        delete
+        from sc
+        where cno = #{cno} and sno=#{sno} and tno=#{tno}
+    </delete>
 
 </mapper>

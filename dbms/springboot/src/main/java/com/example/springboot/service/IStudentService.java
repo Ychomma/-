@@ -15,4 +15,6 @@ public interface IStudentService {
     void deleteById(String id);
 
     List<Student> listByCondition(Student obj);
+
+    void Delete(String sno);
 }

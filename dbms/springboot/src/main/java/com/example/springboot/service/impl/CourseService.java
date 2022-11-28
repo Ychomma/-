@@ -2,6 +2,7 @@ package com.example.springboot.service.impl;
 
 import com.example.springboot.entity.Course;
 import com.example.springboot.mapper.CourseMapper;
+import com.example.springboot.mapper.ScMapper;
 import com.example.springboot.service.ICourseService;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import java.util.List;
 public class CourseService implements ICourseService {
     @Resource
     CourseMapper courseMapper;
+    @Resource
+    ScMapper scMapper;
     @Override
     public List<Course> list() {
         return courseMapper.list();
@@ -35,6 +38,7 @@ public class CourseService implements ICourseService {
 
     @Override
     public void deleteById(String id) {
+        scMapper.deleteByCId(id);
         courseMapper.deleteById(id);
     }
 

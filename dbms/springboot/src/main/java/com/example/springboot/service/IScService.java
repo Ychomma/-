@@ -17,4 +17,5 @@ public interface IScService {
     void deleteBySId(String id);
 
     void deleteByCId(String id);
+    void delete(String cno,String sno,String tno);
 }

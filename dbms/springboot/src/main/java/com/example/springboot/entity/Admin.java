@@ -17,6 +17,8 @@ public class Admin {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date updatetime;
     private boolean status;
+    private boolean flag;
+    private String sno;
 }
 
 

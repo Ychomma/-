@@ -29,7 +29,6 @@ public class AdminService implements IAdminService {
     @Autowired
     AdminMapper adminMapper;
     private static final String DEFAULT_PASS = "123";
-    private static final String PASS_SALT = "chenpeijie";
 
     @Override
     public List<Admin> list() {
@@ -88,8 +87,6 @@ public class AdminService implements IAdminService {
         }
         String securePass =request.getPassword();
         if (!securePass.equals(admin.getPassword())) {
-            System.out.println(securePass);
-            System.out.println(admin.getPassword());
             throw new ServiceException("用户名或密码错误");
         }
         if (!admin.isStatus()) {
@@ -103,6 +100,7 @@ public class AdminService implements IAdminService {
         // 生成Token
         String token = TokenUtils.genToken(String.valueOf(admin.getId()), admin.getPassword());
         loginDTO.setToken(token);
+        System.out.println(loginDTO);
         return loginDTO;
     }
 

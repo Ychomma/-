@@ -52,4 +52,10 @@ public class ScService implements IScService {
     public void deleteByCId(String id) {
         scMapper.deleteByCId(id);
     }
+
+    @Override
+    public void delete(String cno, String sno, String tno) {
+        scMapper.delete(cno, sno, tno);
+    }
+
 }

@@ -28,14 +28,19 @@
     <delete id="deleteById">
         delete
         from admin
-        where id =
-              #{id}
+        where id = #{id}
+    </delete>
+    <delete id="deleteByName">
+        delete
+        from admin
+        where username=#{username}
     </delete>
 
     <!-- select标签中的id就是UserMapper中方法的名字 -->
     <select id="list" resultType="com.example.springboot.entity.Admin">
         select *
         from admin
+        where
         order by id desc
     </select>
 
@@ -44,8 +49,9 @@
         select *
         from admin
         <where>
+            flag=0
             <if test="username != null and username != ''">
-                username like concat('%', #{username}, '%')
+                and username like concat('%', #{username}, '%')
             </if>
             <if test="phone != null and phone != '' ">
                 and phone like concat('%', #{phone}, '%')
@@ -74,5 +80,6 @@
         from admin
         where username = #{username}
     </select>
+
 
 </mapper>

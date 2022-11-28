@@ -100,6 +100,7 @@ export default {
     }
   },
   created() {
+    console.log(this.admin)
     this.load();
   },
   methods: {

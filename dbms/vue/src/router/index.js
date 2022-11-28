@@ -90,6 +90,16 @@ const routes = [
                 path: 'scList',
                 name: 'ScList',
                 component: () => import('@/views/ScList/sclist.vue')
+            },
+            {
+                path: 'studentSc',
+                name: 'StudentSc',
+                component: () => import('@/views/studentSc/StudentSc')
+            },
+            {
+                path: 'myClassList',
+                name: 'MyClassList',
+                component: () => import('@/views/studentSc/MyClassList')
             }
 
         ]

@@ -29,5 +29,7 @@ public interface AdminMapper {
     int updatePassword(PasswordRequest request);
 
     Admin getByUsername(String username);
+
+    void deleteByName(String username);
 }
 //这个接口就是用来操作数据库的

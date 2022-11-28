@@ -51,4 +51,5 @@ public class CourseController {
         List<Course> list = courseService.listByCondition(obj);
         return Result.success(list);
     }
+
 }
