@@ -9,7 +9,7 @@
         where teacher.cno=course.cno
     </select>
     <select id="MyScList" resultType="com.example.springboot.entity.StudentSc">
-        select course.cno,course.cname,teacher.tno,teacher.tname,teacher.phone
+        select course.cno,course.cname,teacher.tno,teacher.tname,teacher.phone,sc.grade
         from course,teacher,sc
         <where>
             teacher.cno=course.cno and sc.cno=course.cno and sc.sno=${sno}

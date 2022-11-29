@@ -61,6 +61,7 @@ export default {
   methods: {
     load() {
       request.post("/sc/mySclist", this.admin.sno).then(res=>{
+        console.log(res)
         if (res.code === '200') {
           this.tableData = res.data
           this.total = res.data.total
