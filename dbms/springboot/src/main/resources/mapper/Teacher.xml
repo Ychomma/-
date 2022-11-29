@@ -19,7 +19,8 @@
         update teacher
         set
             tname= #{tname},
-            cno=#{cno}
+            cno=#{cno},
+            phone=#{phone}
         where tno = #{tno}
     </update>
     <insert id="save">

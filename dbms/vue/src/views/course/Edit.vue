@@ -3,7 +3,7 @@
     <div style="margin-bottom: 30px">编辑课程</div>
     <el-form :inline="true" :rules="rules" ref="ruleForm" :model="form" label-width="100px">
       <el-form-item label="课程编号" prop="cno">
-        <el-input v-model="form.cno" placeholder="请输入课程编号"></el-input>
+        <el-input v-model="form.cno" placeholder="请输入课程编号" disabled></el-input>
       </el-form-item>
       <el-form-item label="课程名称" prop="cname">
         <el-input v-model="form.cname" placeholder="请输入课程名称"></el-input>

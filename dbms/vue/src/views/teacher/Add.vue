@@ -9,7 +9,7 @@
         <el-input v-model="form.tname" placeholder="请输入教师姓名"></el-input>
       </el-form-item>
       <el-form-item label="授课课程编号" prop="cno">
-        <el-input v-model="form.cno" placeholder="请输入课程编号" @blur="findCourse()"></el-input>
+        <el-input v-model="form.cno" placeholder="请输入课程编号" @change="findCourse()"></el-input>
       </el-form-item>
       <el-form-item label="授课课程号名称" prop="cname">
         <el-input v-model="form.cname" placeholder="该课程不存在" disabled></el-input>
@@ -55,7 +55,7 @@ export default {
     findCourse(){
       request.get("/course/"+this.form.cno).then(res=>{
         this.form.cname=null;
-        if(res.data!=null) {
+        if(res.data!==null) {
           this.form.cname = res.data.cname
           this.$forceUpdate()
         }

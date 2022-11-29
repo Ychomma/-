@@ -48,7 +48,6 @@
               <span>学生管理</span>
             </template>
             <el-menu-item index="/studentList">学生列表</el-menu-item>
-            <el-menu-item index="/editStudent">编辑学生信息</el-menu-item>
             <el-menu-item index="/addStudent">增加学生</el-menu-item>
           </el-submenu>
           <el-submenu index="course" v-if="!admin.flag">
@@ -57,7 +56,6 @@
               <span>课程管理</span>
             </template>
             <el-menu-item index="/courseList">课程列表</el-menu-item>
-            <el-menu-item index="/editCourse">编辑课程</el-menu-item>
             <el-menu-item index="/addCourse">增加课程</el-menu-item>
           </el-submenu>
           <el-submenu index="teacher" v-if="!admin.flag">
@@ -66,7 +64,6 @@
               <span>教师管理</span>
             </template>
             <el-menu-item index="/teacherList">教师列表</el-menu-item>
-            <el-menu-item index="/editTeacher">编辑教师信息</el-menu-item>
             <el-menu-item index="/addTeacher">增加教师</el-menu-item>
           </el-submenu>
           <el-menu-item index="scList" v-if="!admin.flag">
