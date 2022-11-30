@@ -4,23 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.springboot.mapper.UnionMapper">
     <select id="list" resultType="com.example.springboot.entity.Union">
-    SELECT student.sno,student.sname,student.ssex,student.sage,student.sdept,student.address,course.cno,course.cname,teacher.tno,teacher.tname,sc.grade
-    FROM student,course,teacher,sc where sc.cno=course.cno and sc.sno =student.sno and sc.cno=teacher.cno
+     select student.sno,student.sname,student.sdept,course.cno,course.cname,course.place,teacher.tno,teacher.tname,sc.grade
+     from student,course,teacher,sc
+     where student.sno=sc.sno and sc.cno=course.cno and course.tno=teacher.tno
     </select>
     <select id="listByCondition" resultType="com.example.springboot.entity.Union">
-        SELECT student.sno,student.sname,student.ssex,student.sage,student.sdept,student.address,course.cno,course.cname,teacher.tno,teacher.tname,sc.grade
-        FROM student,course,teacher,sc
+        select student.sno,student.sname,student.sdept,course.cno,course.cname,course.place,teacher.tno,teacher.tname,sc.grade
+        from student,course,teacher,sc
         <where>
-            <if test="1==1">
-                sc.cno=course.cno and sc.sno =student.sno and sc.cno=teacher.cno
+            student.sno=sc.sno and sc.cno=course.cno and course.tno=teacher.tno
+            <if test="sno!=null and sno!=''">
+                and student.sno like concat('%', #{sno}, '%')
             </if>
-            <if test="cno != null and cno != ''">
-                and course.cno like concat('%', #{cno}, '%')
+            <if test="cname!=null and cname!=''">
+                and course.cname like concat('%', #{cname}, '%')
             </if>
-            <if test="sno != null and sno != ''">
-                 and sc.sno like concat('%', #{sno}, '%')
+            <if test="tname!=null and tname!=''">
+                and teacher.tname like concat('%', #{tname}, '%')
             </if>
         </where>
-        order by sc.cno desc
     </select>
 </mapper>

@@ -23,12 +23,13 @@
             ssex = #{ssex},
             sdept = #{sdept},
             phone=#{phone},
-            address=#{address}
+            address=#{address},
+            schooltime=#{schoolTime}
         where sno = #{sno}
     </update>
     <insert id="save">
-        insert into student (sno,sname, sage, ssex, sdept,phone,address)
-        values (#{sno}, #{sname}, #{sage}, #{ssex},#{sdept},#{phone},#{address})
+        insert into student (sno,sname, sage, ssex, sdept,phone,address,schooltime)
+        values (#{sno}, #{sname}, #{sage}, #{ssex},#{sdept},#{phone},#{address},#{schoolTime})
     </insert>
 
     <select id="getById" resultType="com.example.springboot.entity.Student">

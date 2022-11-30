@@ -19,13 +19,14 @@
         update teacher
         set
             tname= #{tname},
-            cno=#{cno},
-            phone=#{phone}
+            phone=#{phone},
+            email=#{email},
+            introduction=#{introduction}
         where tno = #{tno}
     </update>
     <insert id="save">
-        insert into teacher (tno,tname,cno,phone)
-        values (#{tno}, #{tname},#{cno},#{phone})
+        insert into teacher (tno,tname,phone,email,introduction)
+        values (#{tno}, #{tname},#{phone},#{email},#{introduction})
     </insert>
 
     <select id="getById" resultType="com.example.springboot.entity.Teacher">
@@ -33,6 +34,18 @@
         from teacher
         where tno = #{tno}
     </select>
-
+    <select id="listByCondition" resultType="com.example.springboot.entity.Teacher">
+        select *
+        from teacher
+        <where>
+            <if test="tno != null and tno != ''">
+                and tno like concat('%', #{tno}, '%')
+            </if>
+            <if test="tname != null and tname != ''">
+                and tname like concat('%', #{tname}, '%')
+            </if>
+        </where>
+        order by tno desc
+    </select>
 
 </mapper>

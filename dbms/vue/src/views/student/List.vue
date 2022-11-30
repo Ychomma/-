@@ -8,14 +8,42 @@
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh">重置</i></el-button>
     </div>
     <!-- 表格 -->
-    <el-table :data="tableData" stripe  row-key="id" default-expand-all>
-      <el-table-column prop="sno" label="学号" width="80"></el-table-column>
-      <el-table-column prop="sname" label="姓名"></el-table-column>
+    <el-table :data="tableData" :default-sort = "{prop: 'sno', order: 'descending'}">
+      <el-table-column type="expand" >
+        <template slot-scope="props">
+          <el-form label-position="left" inline class="demo-table-expand">
+            <el-form-item label="学号">
+              <span>{{ props.row.sno }}</span>
+            </el-form-item>
+            <el-form-item label="姓名">
+              <span>{{ props.row.sname }}</span>
+            </el-form-item>
+            <el-form-item label="性别">
+              <span>{{ props.row.ssex }}</span>
+            </el-form-item>
+            <el-form-item label="专业">
+              <span>{{ props.row.sdept }}</span>
+            </el-form-item>
+            <el-form-item label="年龄">
+              <span>{{ props.row.sage }}</span>
+            </el-form-item>
+            <el-form-item label="入学时间">
+              <span>{{ props.row.schoolTime }}</span>
+            </el-form-item>
+            <el-form-item label="联系方式">
+              <span>{{ props.row.phone }}</span>
+            </el-form-item>
+            <el-form-item label="住址">
+              <span>{{ props.row.address }}</span>
+            </el-form-item>
+          </el-form>
+        </template>
+      </el-table-column>
+      <el-table-column prop="sno" label="学号"  sortable ></el-table-column>
+      <el-table-column prop="sname" label="姓名" sortable></el-table-column>
       <el-table-column prop="ssex" label="性别"></el-table-column>
       <el-table-column prop="sage" label="年龄"></el-table-column>
-      <el-table-column prop="sdept" label="专业"></el-table-column>
-      <el-table-column prop="address" label="住址"></el-table-column>
-      <el-table-column prop="phone" label="联系方式"></el-table-column>
+      <el-table-column prop="sdept" label="专业" sortable></el-table-column>
       <el-table-column label="操作" width="280">
         <template v-slot="scope">
           <el-button type="primary" @click="$router.push('/editStudent?id=' + scope.row.sno)">编辑</el-button>
@@ -52,7 +80,13 @@ export default {
   name: 'CategoryList',
   data() {
     return {
-      tableData: [],
+      tableData: [
+
+      ],
+      expands: [], // 只展开一行放入当前行id
+      getRowKeys: (row) => { // 获取当前行id
+        return row.id; // 这里看这一行中需要根据哪个属性值是id
+      },
       total: 0,
       dialogFormVisible:false ,
       admin: Cookies.get("admin") ? JSON.parse(Cookies.get('admin')) : {},
@@ -116,31 +150,33 @@ export default {
         }
       })
     },
-    handleAdd(row){
-      this.pid=row.id
-      this.dialogFormVisible=true;
-    },
-    save() {
-      this.$refs['ruleForm'].validate((valid) => {
-        if (valid) {
-          this.form.pid=this.pid
-          request.post('/category/save', this.form).then(res => {
-            if (res.code === '200') {
-              this.$notify.success('新增二级分类成功')
-              this.$refs['ruleForm'].resetFields()
-              this.dialogFormVisible=false
-              this.load()
-            } else {
-              this.$notify.error(res.msg)
-            }
-          })
+    expandColumn(row, expandedRows) {
+      // 每次只展开一行
+      let that = this;
+      if (expandedRows.length) {
+        that.expands = []
+        if (row) {
+          that.expands.push(row.id)
         }
-      })
+      } else {
+        that.expands = []
+      }
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style>
+.demo-table-expand {
+  font-size: 0;
+}
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
 </style>

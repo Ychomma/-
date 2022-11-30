@@ -23,7 +23,7 @@ public class TeacherController {
 
     @GetMapping("/list")
     public Result List(){
-        List<ExtraCourse> list = extraCourseService.list();
+        List<Teacher> list = teacherService.list();
         return Result.success(list);
     }
 
@@ -49,8 +49,8 @@ public class TeacherController {
     }
 
     @PostMapping("/listbycondition")
-    public Result listByCondition(@RequestBody ExtraCourse obj){
-        List<ExtraCourse> list = extraCourseService.listByCondition(obj);
+    public Result listByCondition(@RequestBody Teacher obj){
+        List<Teacher> list = teacherService.listByCondition(obj);
         return Result.success(list);
     }
 

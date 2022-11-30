@@ -40,5 +40,10 @@ public class TeacherService implements ITeacherService {
         teacherMapper.deleteById(id);
     }
 
+    @Override
+    public List<Teacher> listByCondition(Teacher obj) {
+        return teacherMapper.listByCondition(obj);
+    }
+
 
 }
