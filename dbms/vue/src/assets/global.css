@@ -7,3 +7,10 @@ body {
 * {
     box-sizing: border-box;
 }
+
+@font-face {
+    font-family: "alimama";
+    src: url("../assets/alimama/Alimama_ShuHeiTi_Bold.ttf");
+    src: url("../assets/alimama/Alimama_ShuHeiTi_Bold.woff");
+    src: url("../assets/alimama/Alimama_ShuHeiTi_Bold.woff2");
+}

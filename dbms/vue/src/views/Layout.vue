@@ -2,11 +2,11 @@
   <div>
     <!-- 头部区域  -->
     <div style="height: 60px; line-height: 60px; background-color: white; margin-bottom: 2px; display:flex">
-      <div style="width: 300px">
+      <div style="width: 400px">
         <img src="@/assets/logo.png" alt=""
              style="width: 40px; position: relative; top: 10px; left: 20px">
-        <span style="margin-left: 25px; font-size: 24px" v-if="!admin.flag">学生信息与选课管理系统</span>
-        <span style="margin-left: 25px; font-size: 24px" v-if="admin.flag">学生选课系统</span>
+        <span style="margin-left: 25px; font-size: 24px; font-family: alimama" v-if="!admin.flag">学生信息与选课管理系统</span>
+        <span style="margin-left: 25px; font-size: 24px; font-family: alimama" v-if="admin.flag">学生选课系统</span>
       </div>
       <div style="flex: 1; text-align: right; padding-right: 20px">
         <el-dropdown size="medium">

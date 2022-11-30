@@ -105,6 +105,8 @@ export default {
   },
   methods: {
     changesStatus(row) {
+      console.log(this.admin)
+      console.log(row)
       if (this.admin.id === row.id && !row.status) {
         row.status = true;
         this.$notify.warning("您的操作不合法");
