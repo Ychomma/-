@@ -18,12 +18,17 @@
     <update id="updateById">
         update course
         set
-            cname= #{cname}
+            cname= #{cname},
+            place=#{place},
+            starttime=#{startTime},
+            endtime=#{endTime},
+            introduction=#{introduction},
+            tno=#{tno}
         where cno = #{cno}
     </update>
     <insert id="save">
-        insert into course (cno,cname)
-        values (#{cno}, #{cname})
+        insert into course (cno,cname,place,starttime,endtime,introduction,tno)
+        values (#{cno}, #{cname},#{place},#{startTime},#{endTime},#{introduction},#{tno})
     </insert>
 
     <select id="getById" resultType="com.example.springboot.entity.Course">

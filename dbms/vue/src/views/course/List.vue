@@ -7,9 +7,38 @@
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh">重置</i></el-button>
     </div>
     <!-- 表格 -->
-    <el-table :data="tableData" stripe  row-key="id" default-expand-all>
+    <el-table :data="tableData" stripe>
+      <el-table-column type="expand" >
+        <template slot-scope="props">
+          <el-form label-position="left" inline class="demo-table-expand">
+            <el-form-item label="课程编号">
+              <span>{{ props.row.cno }}</span>
+            </el-form-item>
+            <el-form-item label="课程名">
+              <span>{{ props.row.cname }}</span>
+            </el-form-item>
+            <el-form-item label="上课地点">
+              <span>{{ props.row.place }}</span>
+            </el-form-item>
+            <el-form-item label="开课时间">
+              <span>{{ props.row.startTime }}</span>
+            </el-form-item>
+            <el-form-item label="结课时间">
+              <span>{{ props.row.endTime }}</span>
+            </el-form-item>
+            <el-form-item label="课程简介">
+              <span>{{ props.row.introduction }}</span>
+            </el-form-item>
+          </el-form>
+        </template>
+      </el-table-column>
       <el-table-column prop="cno" label="课程编号" ></el-table-column>
       <el-table-column prop="cname" label="课程名称"></el-table-column>
+      <el-table-column prop="place" label="上课地点"></el-table-column>
+      <el-table-column prop="startTime" label="开课时间"></el-table-column>
+      <el-table-column prop="endTime" label="结课时间"></el-table-column>
+      <el-table-column prop="tno" label="教师编号"></el-table-column>
+      <el-table-column prop="tname" label="教师姓名"></el-table-column>
       <el-table-column label="操作" width="280">
         <template v-slot="scope">
           <el-button type="primary" @click="$router.push('/editCourse?id=' + scope.row.cno)">编辑</el-button>
@@ -70,10 +99,9 @@ export default {
   methods: {
     search(){
       request.post("/course/listbycondition",this.params).then(res=>{
-        if (res.code === '200') {
           this.tableData = res.data
           this.total = res.data.total
-        }
+
       })
     },
     load() {
@@ -85,6 +113,7 @@ export default {
           this.total = res.data.total
         }
       })
+
     },
     reset() {
       this.params = {
@@ -108,31 +137,21 @@ export default {
         }
       })
     },
-    handleAdd(row){
-      this.pid=row.id
-      this.dialogFormVisible=true;
-    },
-    save() {
-      this.$refs['ruleForm'].validate((valid) => {
-        if (valid) {
-          this.form.pid=this.pid
-          request.post('/course/save', this.form).then(res => {
-            if (res.code === '200') {
-              this.$notify.success('新增二级分类成功')
-              this.$refs['ruleForm'].resetFields()
-              this.dialogFormVisible=false
-              this.load()
-            } else {
-              this.$notify.error(res.msg)
-            }
-          })
-        }
-      })
-    }
   }
 }
 </script>
 
-<style scoped>
-
+<style>
+.demo-table-expand {
+  font-size: 0;
+}
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
 </style>

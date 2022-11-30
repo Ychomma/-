@@ -22,6 +22,7 @@ public class StudentController {
     @GetMapping("/list")
     public Result List(){
         List<Student> list=studentService.list();
+        System.out.println(list);
         return Result.success(list);
     }
     @PostMapping("/save")

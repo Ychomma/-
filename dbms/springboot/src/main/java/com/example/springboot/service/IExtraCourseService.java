@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface IExtraCourseService {
     List<ExtraCourse> list();
-    List<ExtraCourse> listByCondition(ExtraCourse obj);
 }

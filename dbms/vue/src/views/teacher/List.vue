@@ -2,18 +2,23 @@
   <div>
     <!-- 搜索表单 -->
     <div style="margin-bottom: 20px">
+      <el-input style="width: 240px" placeholder="根据教师编号查询" v-model="params.tno"></el-input>
       <el-input style="width: 240px" placeholder="根据教师姓名查询" v-model="params.tname"></el-input>
-      <el-input style="width: 240px" placeholder="根据课程名称查询" v-model="params.cname"></el-input>
       <el-button style="margin-left: 5px" type="primary" @click="search"><i class="el-icon-search">搜索</i></el-button>
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh">重置</i></el-button>
     </div>
     <!-- 表格 -->
-    <el-table :data="tableData" stripe  row-key="id" default-expand-all>
-      <el-table-column prop="tno" label="教师编号" width="80"></el-table-column>
-      <el-table-column prop="tname" label="教师姓名"></el-table-column>
-      <el-table-column prop="cno" label="授课课程编号"></el-table-column>
-      <el-table-column prop="cname" label="课程名称"></el-table-column>
+    <el-table :data="tableData" stripe  row-key="id" :default-sort = "{prop: 'sno', order: 'descending'}"l>
+      <el-table-column prop="tno" label="教师编号" sortable></el-table-column>
+      <el-table-column prop="tname" label="教师姓名" sortable></el-table-column>
       <el-table-column prop="phone" label="教师联系方式"></el-table-column>
+      <el-table-column prop="email" label="邮箱"></el-table-column>
+      <el-table-column prop="introduction" label="教师主页" show-overflow-tooltip>
+        <template slot-scope="scope">
+          <a :href=scope.row.introduction target="_blank">{{scope.row.introduction}}</a>
+        </template>
+
+      </el-table-column>
       <el-table-column label="操作" width="280">
         <template v-slot="scope">
           <el-button type="primary" @click="$router.push('/editTeacher?id=' + scope.row.tno)">编辑</el-button>

@@ -2,6 +2,7 @@ package com.example.springboot.service.impl;
 
 import com.example.springboot.common.Result;
 import com.example.springboot.entity.ExtraCourse;
+import com.example.springboot.entity.Teacher;
 import com.example.springboot.mapper.ExtraCourseMapper;
 import com.example.springboot.service.IExtraCourseService;
 import com.example.springboot.service.IUnionService;
@@ -21,8 +22,4 @@ public class ExtraCourseService implements IExtraCourseService {
         return extraCourseMapper.list();
     }
 
-    @Override
-    public List<ExtraCourse> listByCondition(ExtraCourse obj) {
-        return extraCourseMapper.listByCondition(obj);
-    }
 }

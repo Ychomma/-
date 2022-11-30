@@ -1,21 +1,21 @@
 <template>
   <div style="width: 80%">
     <div style="margin-bottom: 30px">新增教师</div>
-    <el-form :inline="true" :rules="rules" ref="ruleForm" :model="form" label-width="100px">
-      <el-form-item label="教师编号" prop="tno">
-        <el-input v-model="form.tno" placeholder="请输入教师编号"></el-input>
+    <el-form :rules="rules" ref="ruleForm" :model="form" label-width="80px">
+      <el-form-item label="教师编号" prop="tno" >
+        <el-input v-model="form.tno" placeholder="请输入教师编号" style="width: 200px"></el-input>
       </el-form-item>
       <el-form-item label="教师姓名" prop="tname">
-        <el-input v-model="form.tname" placeholder="请输入教师姓名"></el-input>
+        <el-input v-model="form.tname" style="width: 200px" placeholder="请输入教师姓名"></el-input>
       </el-form-item>
-      <el-form-item label="授课课程编号" prop="cno">
-        <el-input v-model="form.cno" placeholder="请输入课程编号" @change="findCourse()"></el-input>
+      <el-form-item label="邮箱" prop="email">
+        <el-input v-model="form.email" style="width: 200px" placeholder="请输入教师邮箱"></el-input>
       </el-form-item>
-      <el-form-item label="授课课程号名称" prop="cname">
-        <el-input v-model="form.cname" placeholder="该课程不存在" disabled></el-input>
+      <el-form-item label="联系方式" prop="phone">
+        <el-input v-model="form.phone" style="width: 200px" placeholder="请输入教师联系方式"></el-input>
       </el-form-item>
-      <el-form-item label="教师联系方式" prop="phone">
-        <el-input v-model="form.phone" placeholder="请输入教师联系方式" ></el-input>
+      <el-form-item label="教师介绍" prop="introduction">
+        <el-input v-model="form.introduction" style="width: 200px" placeholder="请输入教师介绍的链接"></el-input>
       </el-form-item>
     </el-form>
 
@@ -36,17 +36,11 @@ export default {
       course:[],
       rules: {
         //姓名仅要求为必填
-        cno: [
-          {required: true, message: '请输入课程编号', trigger: 'blur'},
-        ],
         tno: [
           {required: true, message: '请输入教师编号', trigger: 'blur'},
         ],
         tname: [
           {required: true, message: '请输入教师姓名', trigger: 'blur'},
-        ],
-        cname: [
-          {required: true, message: '该课程不存在', trigger: 'blur'},
         ],
       }
     }

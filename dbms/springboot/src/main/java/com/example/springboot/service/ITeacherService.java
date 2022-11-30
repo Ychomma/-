@@ -14,4 +14,5 @@ public interface ITeacherService {
     void update(Teacher obj);
 
     void deleteById(String id);
+    List<Teacher> listByCondition(Teacher obj);
 }

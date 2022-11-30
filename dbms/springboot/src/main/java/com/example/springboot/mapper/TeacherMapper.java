@@ -18,4 +18,5 @@ public interface TeacherMapper {
     void updateById(Teacher teacher);
 
     void deleteById(String tno);
+    List<Teacher>listByCondition(Teacher obj);
 }
