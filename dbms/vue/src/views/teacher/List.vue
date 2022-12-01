@@ -15,7 +15,7 @@
       <el-table-column prop="email" label="邮箱"></el-table-column>
       <el-table-column prop="introduction" label="教师主页" show-overflow-tooltip>
         <template slot-scope="scope">
-          <a :href=scope.row.introduction target="_blank">{{scope.row.introduction}}</a>
+          <el-link :href=scope.row.introduction target="_blank">{{scope.row.introduction}}></el-link>
         </template>
 
       </el-table-column>

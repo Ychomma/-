@@ -37,11 +37,25 @@
       <el-table-column prop="place" label="上课地点"></el-table-column>
       <el-table-column prop="startTime" label="开课时间"></el-table-column>
       <el-table-column prop="endTime" label="结课时间"></el-table-column>
+      <el-table-column prop="flag" label="是否停止选课">
+        <template v-slot="scope">
+          <span v-if="scope.row.flag">已结束选课</span>
+          <span v-if="!scope.row.flag" style="color:red">未结束选课</span>
+
+        </template>
+      </el-table-column>
       <el-table-column prop="tno" label="教师编号"></el-table-column>
       <el-table-column prop="tname" label="教师姓名"></el-table-column>
       <el-table-column label="操作" width="280">
         <template v-slot="scope">
           <el-button type="primary" @click="$router.push('/editCourse?id=' + scope.row.cno)">编辑</el-button>
+          <el-popconfirm
+              style="margin-left: 5px"
+              title="您确定停止选课吗？"
+              @confirm="endSelect(scope.row)"
+          >
+            <el-button type="warning" slot="reference">停止选课</el-button>
+          </el-popconfirm>
           <el-popconfirm
               style="margin-left: 5px"
               title="您确定删除这行数据吗？"
@@ -108,6 +122,7 @@ export default {
       request.get('/course/list', {
         params: this.params
       }).then(res => {
+        console.log(res)
         if (res.code === '200') {
           this.tableData = res.data
           this.total = res.data.total
@@ -137,6 +152,15 @@ export default {
         }
       })
     },
+    endSelect(row){
+      request.post("/course/endselect",{cno:row.cno}).then(res=>{
+        if(res.code==='200'){
+          this.$notify.success("操作成功")
+          this.load();
+        }
+        else this.$notify.error(res.msg)
+      })
+    }
   }
 }
 </script>

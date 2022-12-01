@@ -59,4 +59,9 @@ public class CourseService implements ICourseService {
     public List<Course> listByCondition(Course obj) {
         return courseMapper.listByCondition(obj);
     }
+
+    @Override
+    public void endSelect(Course course) {
+        courseMapper.endSelect(course);
+    }
 }

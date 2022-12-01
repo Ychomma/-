@@ -17,4 +17,5 @@ public class Course {
     private String Introduction;
     private String Tno;
     private String Tname;
+    private boolean Flag;
 }

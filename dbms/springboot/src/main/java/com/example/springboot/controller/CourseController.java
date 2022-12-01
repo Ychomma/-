@@ -51,5 +51,9 @@ public class CourseController {
         List<Course> list = courseService.listByCondition(obj);
         return Result.success(list);
     }
-
+    @PostMapping("/endselect")
+    public Result endSelect(@RequestBody Course obj){
+        courseService.endSelect(obj);
+        return Result.success();
+    }
 }

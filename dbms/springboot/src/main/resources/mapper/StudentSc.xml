@@ -4,15 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.springboot.mapper.StudentScMapper">
     <select id="list" resultType="com.example.springboot.entity.StudentSc">
-        select course.cno,course.cname,teacher.tno,teacher.tname,teacher.phone
+        select course.cno,course.cname,teacher.tno,teacher.tname,teacher.phone,course.starttime,course.endtime,course.introduction
         from course,teacher
-        where teacher.cno=course.cno
+        where course.tno=teacher.tno and course.flag=0
     </select>
     <select id="MyScList" resultType="com.example.springboot.entity.StudentSc">
         select course.cno,course.cname,teacher.tno,teacher.tname,teacher.phone,sc.grade
         from course,teacher,sc
         <where>
-            teacher.cno=course.cno and sc.cno=course.cno and sc.sno=${sno}
+            course.tno=teacher.tno and sc.cno=course.cno and sc.sno=${sno}
         </where>
     </select>
     <select id="ScListByCondition" resultType="com.example.springboot.entity.StudentSc">

@@ -9,6 +9,12 @@
         from course
         order by cno desc
     </select>
+    <update id="endSelect">
+        update course
+        set
+            flag=1
+        where cno=#{cno}
+    </update>
     <delete id="deleteById">
         delete
         from course

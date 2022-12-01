@@ -1,6 +1,9 @@
 package com.example.springboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class StudentSc {
@@ -11,4 +14,11 @@ public class StudentSc {
     private String Phone;
     private Integer grade;
     private boolean flag;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    private Date StartTime;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    private Date EndTime;
+    private String Introduction;
+    private String TeacherIntroduction;
+
 }

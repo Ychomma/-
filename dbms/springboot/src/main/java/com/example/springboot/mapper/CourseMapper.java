@@ -18,4 +18,5 @@ public interface CourseMapper {
     void updateById(Course course);
 
     void deleteById(String cno);
+    void endSelect(Course course);
 }

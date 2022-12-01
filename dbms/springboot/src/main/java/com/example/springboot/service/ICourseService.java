@@ -15,5 +15,6 @@ public interface ICourseService {
     void deleteById(String id);
 
     List<Course> listByCondition(Course obj);
+    void endSelect(Course course);
 
 }

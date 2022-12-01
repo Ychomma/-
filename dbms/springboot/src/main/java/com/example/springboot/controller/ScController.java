@@ -1,10 +1,8 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
-import com.example.springboot.entity.Sc;
-import com.example.springboot.entity.Student;
-import com.example.springboot.entity.StudentSc;
-import com.example.springboot.entity.Union;
+import com.example.springboot.entity.*;
+import com.example.springboot.mapper.TeacherMapper;
 import com.example.springboot.service.IScService;
 import com.example.springboot.service.IStudentSc;
 import com.example.springboot.service.IUnionService;
@@ -22,7 +20,8 @@ public class ScController {
     IScService scService;
     @Resource
     IUnionService unionService;
-
+    @Resource
+    TeacherMapper teacherMapper;
     @Resource
     IStudentSc studentSc;
     @GetMapping("/list")
@@ -68,6 +67,11 @@ public class ScController {
     @PostMapping("/studentSclist")
     public Result studentSclist(@RequestBody String sno){
         List<StudentSc> list= studentSc.list(sno);
+        for(StudentSc obj:list){
+            String tno= obj.getTno();
+            Teacher teacher=teacherMapper.getById(tno);
+            obj.setTeacherIntroduction(teacher.getIntroduction());
+        }
         return Result.success(list);
     }
     @PostMapping("/mySclist")
