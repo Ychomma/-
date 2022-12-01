@@ -122,7 +122,7 @@ export default {
     search(){
       request.post("/course/listbycondition",this.params).then(res=>{
           this.tableData = res.data
-          this.total = res.data.total
+          this.total = res.data.length
 
       })
     },
@@ -133,7 +133,7 @@ export default {
         console.log(res)
         if (res.code === '200') {
           this.tableData = res.data
-          this.total = res.data.total
+          this.total = res.data.length
         }
       })
 

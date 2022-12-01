@@ -132,7 +132,7 @@ export default {
         request.post("/sc/studentSclist", this.admin.sno).then(res=>{
           if (res.code === '200') {
             this.tableData = res.data
-            this.total = res.data.total
+            this.total = res.data.length
           }
         })
       }

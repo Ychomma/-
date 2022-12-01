@@ -140,7 +140,7 @@ export default {
         console.log(res)
         if (res.code === '200') {
           this.tableData = res.data.data
-          this.total = res.data.total
+          this.total = res.data.length
         }
       })
     },
@@ -156,7 +156,7 @@ export default {
       request.post("/sc/listbycondition", this.params).then(res => {
         if (res.code === '200') {
           this.tableData = res.data.data
-          this.total = res.data.total
+          this.total = res.data.length
         }
       })
     },

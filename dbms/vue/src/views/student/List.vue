@@ -111,7 +111,7 @@ export default {
       request.post("/student/listbycondition",this.params).then(res=>{
         if (res.code === '200') {
           this.tableData = res.data
-          this.total = res.data.total
+          this.total = res.data.length
         }
       })
     },
@@ -121,7 +121,7 @@ export default {
       }).then(res => {
         if (res.code === '200') {
           this.tableData = res.data
-          this.total = res.data.total
+          this.total = res.data.length
         }
       })
     },
