@@ -7,7 +7,7 @@
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh">重置</i></el-button>
     </div>
     <!-- 表格 -->
-    <el-table :data="tableData" stripe>
+    <el-table :data="tableData.slice((params.pageNum-1)*params.pageSize,params.pageNum*params.pageSize)" stripe>
       <el-table-column type="expand" >
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
@@ -41,7 +41,6 @@
         <template v-slot="scope">
           <span v-if="scope.row.flag">已结束选课</span>
           <span v-if="!scope.row.flag" style="color:red">未结束选课</span>
-
         </template>
       </el-table-column>
       <el-table-column prop="tno" label="教师编号"></el-table-column>
@@ -54,7 +53,14 @@
               title="您确定停止选课吗？"
               @confirm="endSelect(scope.row)"
           >
-            <el-button type="warning" slot="reference">停止选课</el-button>
+            <el-button type="warning" slot="reference" v-if="!scope.row.flag">停止选课</el-button>
+          </el-popconfirm>
+          <el-popconfirm
+              style="margin-left: 5px"
+              title="您确定恢复选课吗？"
+              @confirm="endSelect(scope.row)"
+          >
+            <el-button type="primary" slot="reference" v-if="scope.row.flag">恢复选课</el-button>
           </el-popconfirm>
           <el-popconfirm
               style="margin-left: 5px"
@@ -94,7 +100,9 @@ export default {
       dialogFormVisible:false ,
       admin: Cookies.get("admin") ? JSON.parse(Cookies.get('admin')) : {},
       params: {
-        cname:null
+        cname:null,
+        pageNum: 1,
+        pageSize: 8,
       },
       pid:null,
       form:{

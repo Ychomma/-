@@ -8,7 +8,7 @@
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh">重置</i></el-button>
     </div>
     <!-- 表格 -->
-    <el-table :data="tableData" :default-sort = "{prop: 'sno', order: 'descending'}">
+    <el-table :data="tableData.slice((params.pageNum-1)*params.pageSize,params.pageNum*params.pageSize)" :default-sort = "{prop: 'sno', order: 'descending'}">
       <el-table-column type="expand" >
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
@@ -83,16 +83,14 @@ export default {
       tableData: [
 
       ],
-      expands: [], // 只展开一行放入当前行id
-      getRowKeys: (row) => { // 获取当前行id
-        return row.id; // 这里看这一行中需要根据哪个属性值是id
-      },
       total: 0,
       dialogFormVisible:false ,
       admin: Cookies.get("admin") ? JSON.parse(Cookies.get('admin')) : {},
       params: {
         sname:null,
-        sdept:null
+        sdept:null,
+        pageNum: 1,
+        pageSize: 8,
       },
       pid:null,
       form:{

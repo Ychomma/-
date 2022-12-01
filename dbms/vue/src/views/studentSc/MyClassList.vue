@@ -8,7 +8,7 @@
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh">重置</i></el-button>
     </div>
     <!-- 表格 -->
-    <el-table :data="tableData" stripe  row-key="id" default-expand-all>
+    <el-table :data="tableData.slice((params.pageNum-1)*params.pageSize,params.pageNum*params.pageSize)" stripe  row-key="id" default-expand-all>
       <el-table-column prop="cno" label="课程编号" ></el-table-column>
       <el-table-column prop="cname" label="课程名称"></el-table-column>
       <el-table-column prop="tno" label="授课老师编号"></el-table-column>
@@ -44,6 +44,8 @@ export default {
       dialogFormVisible:false ,
       admin: Cookies.get("admin") ? JSON.parse(Cookies.get('admin')) : {},
       params: {
+        pageNum: 1,
+        pageSize: 8,
       },
       pid:null,
       findData:[],

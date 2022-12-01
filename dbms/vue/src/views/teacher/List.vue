@@ -8,7 +8,7 @@
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh">重置</i></el-button>
     </div>
     <!-- 表格 -->
-    <el-table :data="tableData" stripe  row-key="id" :default-sort = "{prop: 'sno', order: 'descending'}"l>
+    <el-table :data="tableData.slice((params.pageNum-1)*params.pageSize,params.pageNum*params.pageSize)" stripe  row-key="id" :default-sort = "{prop: 'sno', order: 'descending'}"l>
       <el-table-column prop="tno" label="教师编号" sortable></el-table-column>
       <el-table-column prop="tname" label="教师姓名" sortable></el-table-column>
       <el-table-column prop="phone" label="教师联系方式"></el-table-column>
@@ -61,7 +61,9 @@ export default {
       admin: Cookies.get("admin") ? JSON.parse(Cookies.get('admin')) : {},
       params: {
         tname:null,
-        cname:null
+        cname:null,
+        pageNum: 1,
+        pageSize: 8,
       },
       pid:null,
       form:{

@@ -12,7 +12,7 @@
     <update id="endSelect">
         update course
         set
-            flag=1
+            flag=abs(flag-1)
         where cno=#{cno}
     </update>
     <delete id="deleteById">

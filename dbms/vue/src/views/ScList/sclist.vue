@@ -10,7 +10,7 @@
       <el-button style="margin-left: 5px" type="primary" @click="isShow=true">成绩概况</el-button>
     </div>
     <!-- 表格 -->
-    <el-table :data="tableData" stripe  row-key="id" default-expand-all>
+    <el-table :data="tableData.slice((params.pageNum-1)*params.pageSize,params.pageNum*params.pageSize)" stripe  row-key="id" default-expand-all>
       <el-table-column prop="sno" label="学号"></el-table-column>
       <el-table-column prop="sname" label="姓名"></el-table-column>
       <el-table-column prop="sdept" label="专业"></el-table-column>
@@ -71,12 +71,15 @@ export default {
       avg:0,
       max:0,
       min:100,
+      size:0,
       total: 0,
       dialogFormVisible:false ,
       admin: Cookies.get("admin") ? JSON.parse(Cookies.get('admin')) : {},
       params: {
         sno:null,
         cno:null,
+        pageNum: 1,
+        pageSize: 8,
       },
       form:{
         cno:{},
@@ -134,6 +137,7 @@ export default {
       request.get('/sc/list', {
         params: this.params
       }).then(res => {
+        console.log(res)
         if (res.code === '200') {
           this.tableData = res.data.data
           this.total = res.data.total
@@ -172,21 +176,25 @@ export default {
         this.avg=0
         this.max=0
         this.min=100
+        this.size=0
         let arr=new Array(5).fill(0);
         this.tableData.forEach(res=>{
-          if(res.grade>this.max) this.max=res.grade
-          if(res.grade<this.min) this.min=res.grade
-          this.avg=this.avg+res.grade
-          if(res.grade===100)
-          {
-            arr[4]=arr[4]+1
-          }
-          else{
-            arr[parseInt(res.grade/20)]=arr[parseInt(res.grade/20)]+1
+          if(res.grade){
+            this.size=this.size+1
+            if(res.grade>this.max) this.max=res.grade
+            if(res.grade<this.min) this.min=res.grade
+            this.avg=this.avg+res.grade
+            if(res.grade===100)
+            {
+              arr[4]=arr[4]+1
+            }
+            else{
+              arr[parseInt(res.grade/20)]=arr[parseInt(res.grade/20)]+1
+            }
           }
         })
         this.option.series[0].data=arr;
-        this.avg=this.avg/(this.tableData.length)
+        this.avg=this.avg/(this.size)
         this.drawChart();
       });
     }

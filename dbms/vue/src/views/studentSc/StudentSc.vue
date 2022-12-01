@@ -7,7 +7,7 @@
       <el-button style="margin-left: 5px" type="warning" @click="reset"><i class="el-icon-refresh">重置</i></el-button>
     </div>
     <!-- 表格 -->
-    <el-table :data="tableData" stripe  :default-sort = "{prop: 'cno'}">
+    <el-table :data="tableData.slice((params.pageNum-1)*params.pageSize,params.pageNum*params.pageSize)" stripe  :default-sort = "{prop: 'cno'}">
       <el-table-column type="expand" >
       <template slot-scope="props">
         <el-form label-position="left" inline class="demo-table-expand">
@@ -87,7 +87,9 @@ export default {
       dialogFormVisible:false ,
       admin: Cookies.get("admin") ? JSON.parse(Cookies.get('admin')) : {},
       params: {
-        cname:null
+        cname:null,
+        pageNum: 1,
+        pageSize: 8,
       },
       pid:null,
       form:{
